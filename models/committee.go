@@ -8,7 +8,7 @@ import (
 
 type Committee struct {
 	gorm.Model
-	Name          string
+	Name          string `gorm:"type:varchar(255)"`
 	Year          time.Time
 	Registrations []Registration
 }
