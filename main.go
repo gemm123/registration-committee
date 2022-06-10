@@ -23,6 +23,7 @@ func main() {
 	dbName := os.Getenv("DB_NAME")
 
 	connectDB := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=5432 sslmode=disable TimeZone=Asia/Shanghai", dbHost, dbUser, dbPass, dbName)
+	defer database.CloseConnection()
 
 	database.InitDB(connectDB)
 	database.Migrate()
