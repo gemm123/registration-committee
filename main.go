@@ -29,6 +29,7 @@ func main() {
 	database.Migrate()
 
 	r := gin.Default()
+	r.Static("/assets", "./assets")
 	r.LoadHTMLGlob("templates/*")
 
 	r.GET("/", func(c *gin.Context) {
