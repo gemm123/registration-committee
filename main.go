@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 	"os"
 
 	"github.com/gemm123/registration-committee/database"
+	"github.com/gemm123/registration-committee/render"
+	"github.com/gemm123/registration-committee/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -30,11 +31,8 @@ func main() {
 
 	r := gin.Default()
 	r.Static("/assets", "./assets")
-	r.LoadHTMLGlob("templates/*")
+	r.HTMLRender = render.LoadTemplates("./templates")
 
-	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "home.tmpl", gin.H{})
-	})
-
+	routes.Routes(r)
 	r.Run()
 }
