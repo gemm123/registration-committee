@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/gemm123/registration-committee/helper"
 	"github.com/gemm123/registration-committee/models"
 	"github.com/gemm123/registration-committee/repository"
 	"github.com/gin-gonic/gin"
@@ -34,20 +35,29 @@ func (s *service) Register(c *gin.Context) {
 func (s *service) PostRegister(c *gin.Context) {
 	name := c.PostForm("name")
 	email := c.PostForm("email")
-	password := c.PostForm("password")
 	gender := c.PostForm("gender")
+
+	password := c.PostForm("password")
+	hashPass, err := helper.HashPassword(password)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "register.tmpl", gin.H{
+			"error": err,
+		})
+		return
+	}
+
 	generation := c.PostForm("generation")
 	intGeneration, _ := strconv.Atoi(generation)
 
 	newUser := models.User{
 		Name:       name,
 		Email:      email,
-		Password:   password,
+		Password:   hashPass,
 		Gender:     gender,
 		Generation: intGeneration,
 	}
 
-	err := s.repository.CreateUser(newUser)
+	err = s.repository.CreateUser(newUser)
 	if err != nil {
 		c.HTML(http.StatusInternalServerError, "register.tmpl", gin.H{
 			"error": err,
