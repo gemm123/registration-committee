@@ -1,0 +1,45 @@
+{{ template "base.tmpl" . }}
+
+{{ define "content.tmpl" }}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Register</h1>
+        </div>
+    </div>
+    <div class="row">
+        <form action="/register" method="post">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" class="form-control" id="" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Gender</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="man">
+                    <label class="form-check-label" for="inlineRadio1">Man</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="woman">
+                    <label class="form-check-label" for="inlineRadio2">Woman</label>
+                  </div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Generation</label>
+                <input type="text" class="form-control" id="" name="generation">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+{{ end }}
