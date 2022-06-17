@@ -22,7 +22,8 @@ func InitDB(dsn string) {
 }
 
 func Migrate() {
-	DB.AutoMigrate(&models.User{}, &models.Registration{}, &models.Committee{})
+	// DB.Migrator().DropTable(&models.User{}, &models.Registration{}, &models.Committee{})
+	DB.AutoMigrate(&models.User{}, &models.Committee{}, &models.Registration{})
 }
 
 func CloseConnection() {
