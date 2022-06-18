@@ -13,6 +13,8 @@ func Routes(r *gin.Engine) {
 
 	r.GET("/", service.Home)
 	r.GET("/login", service.Login)
+	r.POST("/login", service.PostLogin)
 	r.GET("/register", service.Register)
 	r.POST("/register", service.PostRegister)
+	r.GET("/logout", service.Logout)
 }

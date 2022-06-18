@@ -8,11 +8,14 @@ import (
 	"github.com/gemm123/registration-committee/database"
 	"github.com/gemm123/registration-committee/render"
 	"github.com/gemm123/registration-committee/routes"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
 func main() {
+
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("error load .env files")
@@ -32,6 +35,7 @@ func main() {
 	r := gin.Default()
 	r.Static("/assets", "./assets")
 	r.HTMLRender = render.LoadTemplates("./templates")
+	r.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("secret"))))
 
 	routes.Routes(r)
 	r.Run()

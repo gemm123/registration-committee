@@ -24,9 +24,18 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Committee</a>
             </li>
+            {{ if eq .authenticated 1 }}
+            <li class="nav-item">
+              <a class="nav-link" href="/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            {{ else }}
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
+            {{ end }}
           </ul>
         </div>
     </nav>
