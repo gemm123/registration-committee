@@ -128,3 +128,9 @@ func (s *service) Logout(c *gin.Context) {
 
 	c.Redirect(http.StatusFound, "/")
 }
+
+func (s *service) Dashboard(c *gin.Context) {
+	c.HTML(http.StatusOK, "dashboard.tmpl", gin.H{
+		"authenticated": authenticated,
+	})
+}

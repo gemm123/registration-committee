@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/gemm123/registration-committee/database"
+	"github.com/gemm123/registration-committee/middleware"
 	"github.com/gemm123/registration-committee/repository"
 	"github.com/gemm123/registration-committee/service"
 	"github.com/gin-gonic/gin"
@@ -17,4 +18,8 @@ func Routes(r *gin.Engine) {
 	r.GET("/register", service.Register)
 	r.POST("/register", service.PostRegister)
 	r.GET("/logout", service.Logout)
+
+	authorized := r.Group("/dashboard")
+	authorized.Use(middleware.Authentication)
+	authorized.GET("/", service.Dashboard)
 }
